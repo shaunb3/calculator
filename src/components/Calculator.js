@@ -23,24 +23,23 @@ const digits = [
 ]
 
 
-
-
-
-
 class Calculator extends Component{
 
   state={
     history:"0",
     currentDisplay:"0",
     currentNumber:"0",
-    previousNumber:undefined,
-    calc:"0"
+    lastPressed:undefined,
+    calc:"0",
+    prevNumber:"0"
   }
 
   handleClick=(event)=>{
     console.log(event.target.innerText)
     
-    
+    this.setState({lastedPressed:event.target.innerText})
+
+
       if(isNaN(event.target.innerText)=== false){
 
         if(this.state.currentNumber === "0"){
@@ -65,107 +64,62 @@ class Calculator extends Component{
         switch(event.target.innerText){
           case "AC": this.setState({
             currentNumber: "0",
-            previousNumber:undefined,
-            history:undefined
+            history:"0"
             })
             break;
 
           case "=": 
           
-          if(this.state.previousNumber===undefined){
- 
-          }
+          
           console.log("history "+this.state.history)
           console.log("current "+this.state.currentNumber)
-          console.log("previous "+this.state.previousNumber)
-
-         
-
 
           this.setState({
              
-            currentNumber: eval(this.state.previousNumber + this.state.currentNumber),
-            previousNumber:undefined,
+            currentNumber: eval( this.state.currentNumber),
             history:this.state.history + this.state.currentNumber
             })
             break;
 
             case ".":
+            this.setState({prevNumber:this.state.currentNumber})
               
+            if(this.state.prevNumber.includes(".")){
 
-              if(this.state.currentNumber.includes(".")){
-                  this.setState({currentNumber:this.state.currentNumber})
-              }
-              else{
-                this.setState({currentNumber:this.state.currentNumber+"."})
-              }
+            }
+            else{
+              this.setState({currentNumber:this.state.currentNumber+ event.target.innerText})
+            }
+            
             break;
 
-            
+
+            case "+":
+            case "*":
+            case "/":
             case "-":
-            if(this.state.currentNumber==="-"){
+            this.setState({prevNumber:this.state.currentNumber})
+
+            if(this.state.lastedPressed===event.target.innerText){
               
             }
-            else if(this.state.previousNumber===undefined){
-                  this.setState({previousNumber:this.state.currentNumber,
-                currentNumber:event.target.innerText,
-                history:this.state.currentNumber
-                })
-              }
-              
-              else{
-                  this.setState({previousNumber:this.state.previousNumber   +this.state.currentNumber,
-                  currentNumber:event.target.innerText,
-                  history:this.state.previousNumber + this.state.currentNumber
-                })
-              }
-            break
-
-
-
-                          
+            else{
+                this.setState({currentNumber:this.state.currentNumber+ event.target.innerText})
+            }
+            
+            
+            break;            
 
             default:
+            
+        
 
- 
-
-             if(this.state.currentNumber==="+" || this.state.currentNumber==="*" || this.state.currentNumber==="/" ){
-
-
-
-                this.setState({
-                  //currentNumber:this.state.currentNumber+ event.target.innerText
-                  currentNumber: event.target.innerText
-              
-                })
-            }
+            
 
            
 
-            else if(this.state.currentNumber==="0"){
-              this.setState({
-              currentNumber:event.target.innerText
-              
-              })
-            }
-
-            else{
-
-              if(this.state.previousNumber===undefined){
-                  this.setState({previousNumber:this.state.currentNumber,
-                currentNumber:event.target.innerText,
-                history:this.state.currentNumber
-                })
-              }
-              
-              else{
-                  this.setState({previousNumber:this.state.previousNumber   +this.state.currentNumber,
-                  currentNumber:event.target.innerText,
-                  history:this.state.previousNumber + this.state.currentNumber
-                })
-              }
-                   
-            }     
+         
+     
               
               
         
