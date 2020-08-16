@@ -34,11 +34,12 @@ class Calculator extends Component{
     prevNumber:"0"
   }
 
+
   handleClick=(event)=>{
     console.log(event.target.innerText)
     
-    this.setState({lastedPressed:event.target.innerText})
-
+    this.setState({lastPressed:event.target.innerText})
+    
 
       if(isNaN(event.target.innerText)=== false){
 
@@ -62,6 +63,7 @@ class Calculator extends Component{
 
       else{
         switch(event.target.innerText){
+          
           case "AC": this.setState({
             currentNumber: "0",
             history:"0"
@@ -82,14 +84,16 @@ class Calculator extends Component{
             break;
 
             case ".":
-            this.setState({prevNumber:this.state.currentNumber})
-              
-            if(this.state.prevNumber.includes(".")){
+            const {currentNumber} = this.state
 
-            }
-            else{
-              this.setState({currentNumber:this.state.currentNumber+ event.target.innerText})
-            }
+            let split = currentNumber.split(/[\+\-\*\/]/)
+            let last =split.slice(-1)[0]
+             // console.log(split)
+             // console.log("last "+ last)
+
+              if(!last.includes(".")){
+                this.setState({currentNumber:currentNumber+ event.target.innerText})
+              }
             
             break;
 
@@ -98,30 +102,22 @@ class Calculator extends Component{
             case "*":
             case "/":
             case "-":
-            this.setState({prevNumber:this.state.currentNumber})
 
-            if(this.state.lastedPressed===event.target.innerText){
+ 
+            
+
+             if(this.state.lastPressed===event.target.innerText){
               
             }
             else{
                 this.setState({currentNumber:this.state.currentNumber+ event.target.innerText})
+
             }
-            
             
             break;            
 
-            default:
-            
-        
+        default:
 
-            
-
-           
-
-         
-     
-              
-              
         
             
         }
@@ -130,9 +126,19 @@ class Calculator extends Component{
   }
     
     
+ componentDidUpdate(prevProps,prevState) {
+  // Typical usage (don't forget to compare props):
+  if (this.state.currentNumber !== prevState.currentNumber) {
+    if(String(this.state.currentNumber).match(/[\+\-\*\/]{3,}/)){
+        console.log("fuck")
+        this.setState({currentNumber:this.state.currentNumber.replace(/[\+\-\*\/]{3,}/, this.state.lastPressed)})
+      }
 
-  
+      console.log("currentNo"+this.state.currentNumber)
+  }
 
+
+}
 
   
   //---------------------------------------
