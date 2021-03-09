@@ -9,20 +9,31 @@ display: flex;
 .digit{
  width:80px;
  cursor: pointer;
-  padding-top: 30px;
-  padding-bottom:30px;
-  background-color: rgb(202, 200, 200);
+  padding-top: 25px;
+  padding-bottom:25px;
+  background-color: #58595B;
+  color: white;
   text-align:center;
   margin: 5px;
   align-self: baseline;
+  border-radius:10px; 
+  
+  /* font-size: 30px; */
 }
 
 .calc-con{
   /* width:600px; */
-  width: 438px;
+  width: 385px;
   display:flex;
   flex-wrap: wrap;
-  height: 440px;
+  /* height: 440px; */
+  background-color:#39383D;
+  justify-content: center;
+  align-content: center;
+  padding-bottom: 17px;
+  padding-top: 18px;
+  border-radius:10px; 
+  
 
   
 }
@@ -34,10 +45,20 @@ display: flex;
 #zero{
     margin-top: -77px;
 width:170px;
+margin-left: -85px;
 }
 
 #equals{
-  height:100px
+  height:103px;
+  background-color: #F15A2B;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+}
+
+#add,#subtract,#divide,#clear,#multiply{
+background-color: #130F10;
 }
 
 #decimal{
@@ -47,16 +68,33 @@ width:170px;
 #display{
 display:block;
 width:100%;
-font-size:30px;
+padding-bottom: 15px;
+
+
+
 
 }
+
+.display-digits{
+background-color: #A2AF77;
+padding-left:16px;
+font-size:30px;
+width:87%;
+margin:0 auto;
+border-radius:10px;
+padding: 8px 8px;
+}
+
 
 button{
   cursor: pointer;
 }
-.history{
-  min-height:18px;
-}
+
 #display{
   min-height:60px;
+}
+
+.history{
+  font-size: 18px;
+  padding-bottom: 20px;
 }

@@ -79,7 +79,7 @@ class Calculator extends Component{
           this.setState({
              
             currentNumber: eval( this.state.currentNumber),
-            history:this.state.history + this.state.currentNumber
+            history: this.state.currentNumber
             })
             break;
 
@@ -88,8 +88,7 @@ class Calculator extends Component{
 
             let split = currentNumber.split(/[\+\-\*\/]/)
             let last =split.slice(-1)[0]
-             // console.log(split)
-             // console.log("last "+ last)
+
 
               if(!last.includes(".")){
                 this.setState({currentNumber:currentNumber+ event.target.innerText})
@@ -130,7 +129,7 @@ class Calculator extends Component{
   // Typical usage (don't forget to compare props):
   if (this.state.currentNumber !== prevState.currentNumber) {
     if(String(this.state.currentNumber).match(/[\+\-\*\/]{3,}/)){
-        console.log("fuck")
+        
         this.setState({currentNumber:this.state.currentNumber.replace(/[\+\-\*\/]{3,}/, this.state.lastPressed)})
       }
 
@@ -151,8 +150,15 @@ class Calculator extends Component{
   //---------------------------------------
     return(
       <div className="calc-con">
-      <h4 className="history">{this.state.history}</h4>
-      <div id="display">{this.state.currentNumber}</div>
+      
+      <div id="display">
+        
+        <div className="display-digits">
+        <div className="history">{this.state.history}</div>
+          {this.state.currentNumber}
+        </div>
+      
+      </div>
       {digitArr}
       </div>
     )
